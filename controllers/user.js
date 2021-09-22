@@ -63,6 +63,42 @@ exports.createUser = async (req, res) => {
 }
 
 
+
+// user login
+exports.userLogin = async (req, res) => {
+    try{
+        const {email, password} = req.body;
+        const user = await User.findOne({ email });
+
+        if(user && (await user.matchPassword(password))) {
+
+            const userToken = await user.generateUserJWT();
+
+            res.status(200).json({
+                status: 'Login successful!',
+                token: userToken,
+                user : {
+                    id : user._id,
+                    name : user.name,
+                    email : user.email,
+                }
+            })
+
+        }else{
+            res.status(404).json({
+                message: 'Authentication failed!',
+            })
+        }
+
+    }catch(err){
+        res.status(500).json({
+            status: 'Authentication failed!',
+            error: err.message
+        })
+    }
+}
+
+
 // get user info
 exports.getUserInfo = (req, res) => {
     res.send('wlc')
