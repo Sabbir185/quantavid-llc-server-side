@@ -6,11 +6,11 @@
 * run `npm install` or `npm i`
 * create a `public` folder
 * create a `.env` file
-* `In .env file write those -- <br/>
-    PORT=8080  <br/>
-    JWT_SECRET=your_secret_key <br/>
-    JWT_EXPIRE= 1 days <br/>
-    DB_NAME=mongodb://localhost/quantaVid-llc `
+* In .env file write those --
+1. PORT=8080  
+2. JWT_SECRET=your_secret_key 
+3. JWT_EXPIRE= 1 days 
+4. DB_NAME=mongodb://localhost/quantaVid-llc 
 
 #### Run project `node index.js` or if you've already installed nodemon, `nodemon index.js`
 
