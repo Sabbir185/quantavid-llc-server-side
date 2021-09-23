@@ -13,6 +13,8 @@ const imageSchema = new mongoose.Schema({
         ref: "User"
     }
     
+},{
+    timestamps: true
 })
 
 const Image = mongoose.model('Image', imageSchema);

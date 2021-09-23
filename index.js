@@ -31,9 +31,9 @@ mongoose
 
 // routes
 app.use('/api/user', userRouter);
-app.use('/api/imgUpload', imgRouter);
-app.use('/api/audioUpload', audioRouter);
-app.use('/api/videoUpload', videoRouter);
+app.use('/api/image', imgRouter);
+app.use('/api/audio', audioRouter);
+app.use('/api/video', videoRouter);
 
 
 // server

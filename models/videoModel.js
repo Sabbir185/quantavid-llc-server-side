@@ -14,6 +14,8 @@ const videoSchema = new mongoose.Schema({
         ref: "User"
     }
     
+},{
+    timestamps: true
 })
 
 const Video = mongoose.model('Video', videoSchema);
