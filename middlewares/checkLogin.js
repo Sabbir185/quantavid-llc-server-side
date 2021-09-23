@@ -11,7 +11,6 @@ exports.checkLogin = async (req, res, next) => {
 
             const decoded = await jwt.verify(token, process.env.JWT_SECRET);
             req.user = decoded;
-            console.log(req.user.name)
             next();
 
         }catch(err){

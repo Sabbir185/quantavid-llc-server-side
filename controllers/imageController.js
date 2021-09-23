@@ -18,7 +18,6 @@ exports.createImg = async (req, res) => {
             }
             );
 
-        console.log(newImg)
 
         await User.updateOne({ _id: req.user.id}, {$push: {images: newImg._id}});
 

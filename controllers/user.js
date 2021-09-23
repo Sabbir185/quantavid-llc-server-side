@@ -50,6 +50,7 @@ exports.createUser = async (req, res) => {
                 id: newUser._id,
                 name: newUser.name,
                 email: newUser.email,
+                avatar: newUser.avatar
             }
         })
     } catch (error) {
@@ -81,6 +82,7 @@ exports.userLogin = async (req, res) => {
                     id : user._id,
                     name : user.name,
                     email : user.email,
+                    avatar: user.avatar
                 }
             })
 
@@ -101,7 +103,7 @@ exports.userLogin = async (req, res) => {
 
 // get user info by id
 exports.getUserInfo = async (req, res) => {
-    console.log(req.params.id)
+    
     try{
         const user = await User.findById({_id: req.params.id}).select('-password -__v').populate([
             {
@@ -137,7 +139,7 @@ exports.getUserInfo = async (req, res) => {
 
 // update profile image
 exports.updateProfile = async (req, res) => {
-    
+
     const destination = (req.files[0].destination)
     const filename = (req.files[0].filename)
     const imagePath = destination + filename;
@@ -146,7 +148,7 @@ exports.updateProfile = async (req, res) => {
 
         const updateUser = await User.findByIdAndUpdate(
             { _id: req.params.id },
-            {image: imagePath});
+            {avatar: imagePath});
 
         res.status(200).json({
             status: 'Profile Updated successfully!',

@@ -18,7 +18,6 @@ exports.createVideo = async (req, res) => {
             }
             );
 
-        console.log(newVideo)
 
         await User.updateOne({ _id: req.user.id}, {$push: {videos: newVideo._id}});
 
