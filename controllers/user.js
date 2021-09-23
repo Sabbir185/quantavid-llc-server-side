@@ -56,7 +56,7 @@ exports.createUser = async (req, res) => {
         res.status(400).json({
             status: 'failed!',
             error: {
-                message: err.message
+                message: error.message
             }
         });
     }
@@ -99,7 +99,64 @@ exports.userLogin = async (req, res) => {
 }
 
 
-// get user info
-exports.getUserInfo = (req, res) => {
-    res.send('wlc')
+// get user info by id
+exports.getUserInfo = async (req, res) => {
+    console.log(req.params.id)
+    try{
+        const user = await User.findById({_id: req.params.id}).select('-password -__v').populate([
+            {
+                path: "images",
+                model: "Image",
+            },
+            {
+                path: "audios",
+                model: "Audio",
+            },
+            {
+                path: "videos",
+                model: "Video",
+            },
+        ]);
+
+        res.status(200).json({
+            status: 'successful!',
+            user
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status: 'Failed',
+            error: {
+                message: err.message
+            }
+        });
+    }
+}
+
+
+
+// update profile image
+exports.updateProfile = async (req, res) => {
+    
+    const destination = (req.files[0].destination)
+    const filename = (req.files[0].filename)
+    const imagePath = destination + filename;
+  
+    try{
+
+        const updateUser = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            {image: imagePath});
+
+        res.status(200).json({
+            status: 'Profile Updated successfully!',
+            update: true
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status: 'Failed to update!',
+            message: err.message
+        })
+    }
 }

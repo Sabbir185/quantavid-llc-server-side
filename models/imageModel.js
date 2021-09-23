@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({
+    title: {
+        type: String
+    },
     image: {
         type: String,
         required: true,
-        trim: true
     },
     user: {
         type: mongoose.Types.ObjectId,

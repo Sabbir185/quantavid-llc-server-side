@@ -7,7 +7,7 @@ const {createUser, userLogin, getUserInfo }= require('../controllers/user');
 router.post('/', createUser);
 router.post('/login', userLogin);
 
-router.get('/', getUserInfo);
+router.get('/:id', getUserInfo);
 
 // module export
 module.exports = router;
